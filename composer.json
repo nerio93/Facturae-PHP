@@ -1,14 +1,14 @@
 {
-    "name": "josemmo/facturae-php",
+    "name": "nerio93/facturae-php",
     "description": "Librería para la generación, firma y envío de facturas electrónicas",
     "keywords": ["facturae", "xades", "face", "faceb2b"],
     "license": "MIT",
-    "homepage": "https://github.com/josemmo/Facturae-PHP",
+    "homepage": "https://github.com/nerio93/Facturae-PHP",
     "authors": [
         {
             "name": "josemmo",
             "email": "josemmo@pm.me",
-            "homepage": "https://github.com/josemmo"
+            "homepage": "https://github.com/nerio93"
         }
     ],
     "require": {

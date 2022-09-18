@@ -6,6 +6,6 @@ source: doc/
 # Aux links for the upper right navigation
 aux_links:
   "GitHub":
-    - "https://github.com/josemmo/Facturae-PHP"
+    - "https://github.com/nerio93/Facturae-PHP"
   "Packagist":
-    - "https://packagist.org/packages/josemmo/facturae-php"
+    - "https://packagist.org/packages/nerio93/facturae-php"

@@ -12,6 +12,8 @@ use josemmo\Facturae\FacturaeItem;
 trait PropertiesTrait {
   protected $currency = "EUR";
   protected $language = "es";
+  protected $documentType = "FC";
+  protected $invoiceClass = "OO";
   protected $version = null;
   protected $precision = self::PRECISION_LINE;
   protected $header = array(
@@ -386,6 +388,85 @@ trait PropertiesTrait {
   public function getContractReference() {
     return $this->header['receiverContractReference'];
   }
+
+  /**
+   * Set Currency
+   * @param string $currency Currency
+   * @return Facturae Invoice instance
+   */
+  public function setCurrency($currency) {
+    if($currency)
+      $this->currency = $currency;
+    return $this;
+  }
+
+  /**
+   * Get Currency
+   * @return string Currency
+   */
+  public function getCurrency() {
+    return $this->currency;
+  }
+
+  /**
+   * Set Language
+   * @param string $lang Language
+   * @return Facturae Invoice instance
+   */
+  public function setLanguage($lang) {
+    if($lang)
+      $this->language = $lang;
+    return $this;
+  }
+
+  /**
+   * GetLanguage
+   * @return string Language
+   */
+  public function getLanguage() {
+    return $this->language;
+  }
+
+  /**
+   * Set Invoice Document Type
+   * @param string $type InvoiceDocumentType
+   * @return Facturae Invoice instance
+   */
+  public function setInvoiceDocumentType($type){
+    if($type){
+      $this->documentType = $type;
+    }
+    return $this;
+  }
+
+  /**
+   * Get Invoice Document Type
+   * @return string Invoice Document Type
+   */
+  public function getInvoiceDocumentType(){
+    return $this->documentType;
+  }
+
+  /**
+   * Set Invoice Class
+   * @param string $class InvoiceClass
+   * @return Facturae Invoice instance
+   */
+  public function setInvoiceClass($class){
+    if($class){
+      $this->invoiceClass = $class;
+    }
+    return $this;
+  }
+
+  /**
+   * Get Invoice Class
+   * @return string Invoice Class
+   */
+  public function getInvoiceClass(){
+    return $this->invoiceClass;
+  }
+
 
 
   /**
