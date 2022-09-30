@@ -1,9 +1,9 @@
 <?php
-namespace josemmo\Facturae\Tests;
+namespace nerio93\Facturae\Tests;
 
 use PHPUnit\Framework\TestCase;
-use josemmo\Facturae\Facturae;
-use josemmo\Facturae\FacturaeParty;
+use nerio93\Facturae\Facturae;
+use nerio93\Facturae\FacturaeParty;
 
 abstract class AbstractTest extends TestCase {
 
@@ -11,7 +11,7 @@ abstract class AbstractTest extends TestCase {
   const CERTS_DIR = __DIR__ . "/certs";
   const FACTURAE_CERT_PASS = "1234";
   const WEBSERVICES_CERT_PASS = "IZProd2021";
-  const NOTIFICATIONS_EMAIL = "josemmo@pm.me";
+  const NOTIFICATIONS_EMAIL = "nerio93@pm.me";
   const COOKIES_PATH = self::OUTPUT_DIR . "/cookies.txt";
 
   /**

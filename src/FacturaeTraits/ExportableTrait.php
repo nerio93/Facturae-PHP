@@ -1,7 +1,7 @@
 <?php
-namespace josemmo\Facturae\FacturaeTraits;
+namespace nerio93\Facturae\FacturaeTraits;
 
-use josemmo\Facturae\Common\XmlTools;
+use nerio93\Facturae\Common\XmlTools;
 
 /**
  * Allows a Facturae instance to be exported to XML.

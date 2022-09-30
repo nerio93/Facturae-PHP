@@ -1,8 +1,8 @@
 <?php
-namespace josemmo\Facturae\FacturaeTraits;
+namespace nerio93\Facturae\FacturaeTraits;
 
-use josemmo\Facturae\FacturaeFile;
-use josemmo\Facturae\FacturaeItem;
+use nerio93\Facturae\FacturaeFile;
+use nerio93\Facturae\FacturaeItem;
 
 /**
  * Implements all attributes and methods needed to make Facturae instantiable.

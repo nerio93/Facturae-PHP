@@ -1,7 +1,7 @@
 <?php
-namespace josemmo\Facturae\Extensions;
+namespace nerio93\Facturae\Extensions;
 
-use josemmo\Facturae\FacturaeCentre;
+use nerio93\Facturae\FacturaeCentre;
 
 class Fb2bExtension extends FacturaeExtension {
   private $publicSectorInfo = array();

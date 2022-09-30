@@ -1,5 +1,5 @@
 <?php
-namespace josemmo\Facturae;
+namespace nerio93\Facturae;
 
 /**
  * Facturae File

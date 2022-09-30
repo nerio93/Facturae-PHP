@@ -1,7 +1,7 @@
 <?php
-namespace josemmo\Facturae;
+namespace nerio93\Facturae;
 
-use josemmo\Facturae\Common\XmlTools;
+use nerio93\Facturae\Common\XmlTools;
 
 /**
  * Facturae Party
@@ -14,6 +14,7 @@ class FacturaeParty {
   public $isLegalEntity = true; // By default is a company and not a person
   public $taxNumber = null;
   public $name = null;
+  public $residenceCode = 'R';
 
   // This block is only used for legal entities
   public $book = null;                        // "Libro"
@@ -69,7 +70,7 @@ class FacturaeParty {
     // Add tax identification
     $xml = '<TaxIdentification>' .
              '<PersonTypeCode>' . ($this->isLegalEntity ? 'J' : 'F') . '</PersonTypeCode>' .
-             '<ResidenceTypeCode>R</ResidenceTypeCode>' .
+             '<ResidenceTypeCode>' . ($this->residenceCode) . '</ResidenceTypeCode>' .
              '<TaxIdentificationNumber>' . $tools->escape($this->taxNumber) . '</TaxIdentificationNumber>' .
            '</TaxIdentification>';
 

@@ -1,5 +1,5 @@
 <?php
-namespace josemmo\Facturae\Common;
+namespace nerio93\Facturae\Common;
 
 class XmlTools {
 

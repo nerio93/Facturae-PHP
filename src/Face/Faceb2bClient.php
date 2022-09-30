@@ -1,8 +1,8 @@
 <?php
-namespace josemmo\Facturae\Face;
+namespace nerio93\Facturae\Face;
 
-use josemmo\Facturae\Face\Traits\Faceb2bTrait;
-use josemmo\Facturae\Face\Traits\StageableTrait;
+use nerio93\Facturae\Face\Traits\Faceb2bTrait;
+use nerio93\Facturae\Face\Traits\StageableTrait;
 
 class Faceb2bClient extends SoapClient {
   use StageableTrait;

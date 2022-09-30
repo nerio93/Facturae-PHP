@@ -1,9 +1,9 @@
 <?php
-namespace josemmo\Facturae\Tests;
+namespace nerio93\Facturae\Tests;
 
-use josemmo\Facturae\Facturae;
-use josemmo\Facturae\FacturaeCentre;
-use josemmo\Facturae\Tests\Extensions\DisclaimerExtension;
+use nerio93\Facturae\Facturae;
+use nerio93\Facturae\FacturaeCentre;
+use nerio93\Facturae\Tests\Extensions\DisclaimerExtension;
 
 final class ExtensionsTest extends AbstractTest {
 

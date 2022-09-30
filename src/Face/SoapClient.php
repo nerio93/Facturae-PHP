@@ -1,9 +1,9 @@
 <?php
-namespace josemmo\Facturae\Face;
+namespace nerio93\Facturae\Face;
 
-use josemmo\Facturae\Facturae;
-use josemmo\Facturae\Common\KeyPairReader;
-use josemmo\Facturae\Common\XmlTools;
+use nerio93\Facturae\Facturae;
+use nerio93\Facturae\Common\KeyPairReader;
+use nerio93\Facturae\Common\XmlTools;
 
 abstract class SoapClient {
 

@@ -1,7 +1,7 @@
 <?php
-namespace josemmo\Facturae\Face;
+namespace nerio93\Facturae\Face;
 
-use josemmo\Facturae\Face\Traits\FaceTrait;
+use nerio93\Facturae\Face\Traits\FaceTrait;
 
 class CustomFaceClient extends SoapClient {
   private $endpointUrl;

@@ -1,7 +1,7 @@
 <?php
-namespace josemmo\Facturae\Face\Traits;
+namespace nerio93\Facturae\Face\Traits;
 
-use josemmo\Facturae\Common\XmlTools;
+use nerio93\Facturae\Common\XmlTools;
 
 trait Faceb2bTrait {
   /**

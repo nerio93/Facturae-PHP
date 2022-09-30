@@ -6,8 +6,8 @@
     "homepage": "https://github.com/nerio93/Facturae-PHP",
     "authors": [
         {
-            "name": "josemmo",
-            "email": "josemmo@pm.me",
+            "name": "Nerio",
+            "email": "nerio.hdiaz@gmail.com",
             "homepage": "https://github.com/nerio93"
         }
     ],
@@ -25,12 +25,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "josemmo\\Facturae\\Tests\\": "tests/"
+            "nerio93\\Facturae\\Tests\\": "tests/"
         }
     },
     "autoload": {
         "psr-4": {
-            "josemmo\\Facturae\\": "src/"
+            "nerio93\\Facturae\\": "src/"
         }
     }
 }

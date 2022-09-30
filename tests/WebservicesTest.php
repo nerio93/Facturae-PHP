@@ -1,12 +1,12 @@
 <?php
-namespace josemmo\Facturae\Tests;
+namespace nerio93\Facturae\Tests;
 
-use josemmo\Facturae\Facturae;
-use josemmo\Facturae\FacturaeParty;
-use josemmo\Facturae\FacturaeCentre;
-use josemmo\Facturae\FacturaeFile;
-use josemmo\Facturae\Face\FaceClient;
-use josemmo\Facturae\Face\Faceb2bClient;
+use nerio93\Facturae\Facturae;
+use nerio93\Facturae\FacturaeParty;
+use nerio93\Facturae\FacturaeCentre;
+use nerio93\Facturae\FacturaeFile;
+use nerio93\Facturae\Face\FaceClient;
+use nerio93\Facturae\Face\Faceb2bClient;
 
 final class WebservicesTest extends AbstractTest {
 

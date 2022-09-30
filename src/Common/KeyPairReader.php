@@ -1,5 +1,5 @@
 <?php
-namespace josemmo\Facturae\Common;
+namespace nerio93\Facturae\Common;
 
 /**
  * Gets both public and private keys from a PKCS#12 certificate store or a PEM

@@ -1,7 +1,7 @@
 <?php
-namespace josemmo\Facturae\Tests;
+namespace nerio93\Facturae\Tests;
 
-use josemmo\Facturae\Facturae;
+use nerio93\Facturae\Facturae;
 
 final class PerformanceTest extends AbstractTest {
 

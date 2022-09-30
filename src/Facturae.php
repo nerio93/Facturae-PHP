@@ -1,10 +1,10 @@
 <?php
-namespace josemmo\Facturae;
+namespace nerio93\Facturae;
 
-use josemmo\Facturae\FacturaeTraits\PropertiesTrait;
-use josemmo\Facturae\FacturaeTraits\UtilsTrait;
-use josemmo\Facturae\FacturaeTraits\SignableTrait;
-use josemmo\Facturae\FacturaeTraits\ExportableTrait;
+use nerio93\Facturae\FacturaeTraits\PropertiesTrait;
+use nerio93\Facturae\FacturaeTraits\UtilsTrait;
+use nerio93\Facturae\FacturaeTraits\SignableTrait;
+use nerio93\Facturae\FacturaeTraits\ExportableTrait;
 
 /**
  * Class for creating electronic invoices that comply with the Spanish FacturaE format.

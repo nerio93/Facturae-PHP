@@ -1,8 +1,8 @@
 <?php
-namespace josemmo\Facturae\FacturaeTraits;
+namespace nerio93\Facturae\FacturaeTraits;
 
-use josemmo\Facturae\Common\KeyPairReader;
-use josemmo\Facturae\Common\XmlTools;
+use nerio93\Facturae\Common\KeyPairReader;
+use nerio93\Facturae\Common\XmlTools;
 
 /**
  * Implements all properties and methods needed for an instantiable

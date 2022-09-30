@@ -1,8 +1,8 @@
 <?php
-namespace josemmo\Facturae\Tests;
+namespace nerio93\Facturae\Tests;
 
-use josemmo\Facturae\Facturae;
-use josemmo\Facturae\FacturaeItem;
+use nerio93\Facturae\Facturae;
+use nerio93\Facturae\FacturaeItem;
 
 final class PrecisionTest extends AbstractTest {
   private function _runTest($schema, $precision) {

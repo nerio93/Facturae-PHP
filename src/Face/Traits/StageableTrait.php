@@ -1,5 +1,5 @@
 <?php
-namespace josemmo\Facturae\Face\Traits;
+namespace nerio93\Facturae\Face\Traits;
 
 trait StageableTrait {
   private $production = true;

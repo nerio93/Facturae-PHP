@@ -1,7 +1,7 @@
 <?php
-namespace josemmo\Facturae\Tests\Extensions;
+namespace nerio93\Facturae\Tests\Extensions;
 
-use josemmo\Facturae\Extensions\FacturaeExtension;
+use nerio93\Facturae\Extensions\FacturaeExtension;
 
 class DisclaimerExtension extends FacturaeExtension {
   private $enabled = false;

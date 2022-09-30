@@ -1,5 +1,5 @@
 <?php
-namespace josemmo\Facturae\FacturaeTraits;
+namespace nerio93\Facturae\FacturaeTraits;
 
 /**
  * Implements utilitary methods for an instantiable Facturae.

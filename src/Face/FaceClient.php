@@ -1,8 +1,8 @@
 <?php
-namespace josemmo\Facturae\Face;
+namespace nerio93\Facturae\Face;
 
-use josemmo\Facturae\Face\Traits\FaceTrait;
-use josemmo\Facturae\Face\Traits\StageableTrait;
+use nerio93\Facturae\Face\Traits\FaceTrait;
+use nerio93\Facturae\Face\Traits\StageableTrait;
 
 class FaceClient extends SoapClient {
   use StageableTrait;

@@ -1,5 +1,5 @@
 <?php
-namespace josemmo\Facturae\Extensions;
+namespace nerio93\Facturae\Extensions;
 
 abstract class FacturaeExtension {
   private $fac;
