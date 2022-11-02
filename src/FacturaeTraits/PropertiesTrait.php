@@ -720,6 +720,8 @@ trait PropertiesTrait {
     foreach ($this->items as $itemObj) {
       $item = $itemObj->getData($this);
       $totals['grossAmount'] += $item['grossAmount'];
+      if(!empty($item['discounts']))
+        $this->discounts[] = $item['discounts'][0];
       $items[] = $item;
     }
 
@@ -731,7 +733,7 @@ trait PropertiesTrait {
           $amount = $item['amount'];
         } else {
           $rate = $item['rate'];
-          $amount = $totals['grossAmount'] * ($rate / 100);
+          $amount = isset($item['amount']) ? $item['amount'] : $totals['grossAmount'] * ($rate / 100);
         }
         $totals['general' . ucfirst($groupTag)][] = [
           "reason" => $item['reason'],
