@@ -304,15 +304,16 @@ trait PropertiesTrait {
       }
 
       if($method == self::PAYMENT_TRANSFER){
-          $this->header['installemntDueDate'] = $data['dueDate'];
+          $this->header['installemntDueDate'] = $data['dueDate'] ?? '';
+          $this->header['accountNumber'] = $data['accountNumber'] ?? '';
 
-          $this->header['bankCode'] = $data['bank'];
-          $this->header['branch'] = $data['branch'];
-          $this->header['address'] = $data['address'];
-          $this->header['town'] = $data['town'];
-          $this->header['province'] = $data['province'];
-          $this->header['postalCode'] = $data['postal'];
-          $this->header['countryCode'] = $data['country'];
+          $this->header['bankCode'] = $data['bank'] ?? '';
+          $this->header['branch'] = $data['branch'] ?? '';
+          $this->header['address'] = $data['address'] ?? '';
+          $this->header['town'] = $data['town'] ?? '';
+          $this->header['province'] = $data['province'] ?? '';
+          $this->header['postalCode'] = $data['postal'] ?? '';
+          $this->header['countryCode'] = $data['country'] ?? '';
        }
 
       $this->header['paymentIBAN'] = $iban;

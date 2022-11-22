@@ -329,21 +329,34 @@ trait ExportableTrait {
       if (!is_null($this->header['paymentBIC'])) {
         $xml .= '<BIC>' . $this->header['paymentBIC'] . '</BIC>';
       }
-      $xml .= '<BankCode>' . $this->header['bankCode'] . '</BankCode>';
-      $xml .= '<BranchCode>' . $this->header['branch'] . '</BranchCode>';
-      if($this->header['countryCode'] === 'ESP'){
+      if(!is_null($this->header['accountNumber'] || $this->header['accountNumber'] !== '')){
+          $xml .= '<AccountNumber>' . $this->header['accountNumber'] . '</AccountNumber>';
+      }
+
+      if($this->header['bankCode'] !== '')
+        $xml .= '<BankCode>' . $this->header['bankCode'] . '</BankCode>';
+      if($this->header['branch'] !== '')
+        $xml .= '<BranchCode>' . $this->header['branch'] . '</BranchCode>';
+      if($this->header['countryCode'] !== '' && $this->header['countryCode'] === 'ESP'){
           $xml .= '<BranchInSpainAddress>';
-          $xml .= '<Address>' . $this->header['address'] . '</Address>';
-          $xml .= '<PostCode>' . $this->header['postalCode'] . '</PostCode>';
-          $xml .= '<Town>' . $this->header['town'] . '</Town>';
-          $xml .= '<Province>' . $this->header['province'] . '</Province>';
+          if($this->header['address'] !== '')
+            $xml .= '<Address>' . $this->header['address'] . '</Address>';
+          if($this->header['postalCode'] !== '')
+            $xml .= '<PostCode>' . $this->header['postalCode'] . '</PostCode>';
+          if($this->header['town'] !== '')
+            $xml .= '<Town>' . $this->header['town'] . '</Town>';
+          if($this->header['province'] !== '')
+            $xml .= '<Province>' . $this->header['province'] . '</Province>';
           $xml .= '<CountryCode>' . $this->header['countryCode'] . '</CountryCode>';
           $xml .= '</BranchInSpainAddress>';
-      }else{
+      }elseif($this->header['countryCode'] !== ''){
           $xml .= '<OverseasBranchAddress>';
-          $xml .= '<Address>' . $this->header['address'] . '</Address>';
-          $xml .= '<PostCodeAndTown>' . $this->header['town'] . ' ' . $this->header['postalCode']  . '</PostCodeAndTown>';
-          $xml .= '<Province>' . $this->header['province'] . '</Province>';
+          if($this->header['address'] !== '')
+            $xml .= '<Address>' . $this->header['address'] . '</Address>';
+          if($this->header['postalCode'] !== '' || $this->header['town'])
+            $xml .= '<PostCodeAndTown>' . $this->header['town'] . ' ' . $this->header['postalCode']  . '</PostCodeAndTown>';
+          if($this->header['province'] !== '')
+            $xml .= '<Province>' . $this->header['province'] . '</Province>';
           $xml .= '<CountryCode>' . $this->header['countryCode'] . '</CountryCode>';
           $xml .= '</OverseasBranchAddress>';
       }
