@@ -329,6 +329,24 @@ trait ExportableTrait {
       if (!is_null($this->header['paymentBIC'])) {
         $xml .= '<BIC>' . $this->header['paymentBIC'] . '</BIC>';
       }
+      $xml .= '<BankCode>' . $this->header['bankCode'] . '</BankCode>';
+      $xml .= '<BranchCode>' . $this->header['branch'] . '</BranchCode>';
+      if($this->header['countryCode'] === 'ESP'){
+          $xml .= '<BranchInSpainAddress>';
+          $xml .= '<Address>' . $this->header['address'] . '</Address>';
+          $xml .= '<PostCode>' . $this->header['postalCode'] . '</PostCode>';
+          $xml .= '<Town>' . $this->header['town'] . '</Town>';
+          $xml .= '<Province>' . $this->header['province'] . '</Province>';
+          $xml .= '<CountryCode>' . $this->header['countryCode'] . '</CountryCode>';
+          $xml .= '</BranchInSpainAddress>';
+      }else{
+          $xml .= '<OverseasBranchAddress>';
+          $xml .= '<Address>' . $this->header['address'] . '</Address>';
+          $xml .= '<PostCodeAndTown>' . $this->header['town'] . ' ' . $this->header['postalCode']  . '</PostCodeAndTown>';
+          $xml .= '<Province>' . $this->header['province'] . '</Province>';
+          $xml .= '<CountryCode>' . $this->header['countryCode'] . '</CountryCode>';
+          $xml .= '</OverseasBranchAddress>';
+      }
       $xml .= "</$accountType>";
     }
     $xml .= '</Installment>';

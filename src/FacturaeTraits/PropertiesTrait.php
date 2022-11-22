@@ -288,15 +288,38 @@ trait PropertiesTrait {
    * @param  string|null $bic    SWIFT/BIC code of bank account
    * @return Facturae            Invoice instance
    */
-  public function setPaymentMethod($method=self::PAYMENT_CASH, $iban=null, $bic=null) {
-    if (!is_null($iban)) $iban = preg_replace('/[^A-Z0-9]/', '', $iban);
-    if (!is_null($bic)) {
-      $bic = preg_replace('/[^A-Z0-9]/', '', $bic);
-      $bic = str_pad($bic, 11, 'X');
+  public function setPaymentMethod($method=self::PAYMENT_TRANSFER, $data=[]) {
+    if(!empty($data)) {
+      $iban =  null;
+      $bic = null;
+      if(isset($data['bic']))
+        $bic = $data['bic'];
+      if(isset($data['iban']))
+        $iban = $data['iban'];
+
+      if (!is_null($iban)) $iban = preg_replace('/[^A-Z0-9]/', '', $iban);
+      if (!is_null($bic)) {
+        $bic = preg_replace('/[^A-Z0-9]/', '', $bic);
+        $bic = str_pad($bic, 11, 'X');
+      }
+
+      if($method == self::PAYMENT_TRANSFER){
+          $this->header['installemntDueDate'] = $data['dueDate'];
+
+          $this->header['bankCode'] = $data['bank'];
+          $this->header['branch'] = $data['branch'];
+          $this->header['address'] = $data['address'];
+          $this->header['town'] = $data['town'];
+          $this->header['province'] = $data['province'];
+          $this->header['postalCode'] = $data['postal'];
+          $this->header['countryCode'] = $data['country'];
+       }
+
+      $this->header['paymentIBAN'] = $iban;
+      $this->header['paymentBIC'] = $bic;
     }
     $this->header['paymentMethod'] = $method;
-    $this->header['paymentIBAN'] = $iban;
-    $this->header['paymentBIC'] = $bic;
+
     return $this;
   }
 
