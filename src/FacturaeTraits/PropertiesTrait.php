@@ -305,7 +305,7 @@ trait PropertiesTrait {
 
       if($method == self::PAYMENT_TRANSFER){
           $this->header['installemntDueDate'] = $data['dueDate'] ?? '';
-          $this->header['accountNumber'] = $data['accountNumber'] ?? '';
+
 
           $this->header['bankCode'] = $data['bank'] ?? '';
           $this->header['branch'] = $data['branch'] ?? '';

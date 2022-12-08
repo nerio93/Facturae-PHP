@@ -329,9 +329,7 @@ trait ExportableTrait {
       if (!is_null($this->header['paymentBIC'])) {
         $xml .= '<BIC>' . $this->header['paymentBIC'] . '</BIC>';
       }
-      if(!is_null($this->header['accountNumber'] || $this->header['accountNumber'] !== '')){
-          $xml .= '<AccountNumber>' . $this->header['accountNumber'] . '</AccountNumber>';
-      }
+
 
       if($this->header['bankCode'] !== '')
         $xml .= '<BankCode>' . $this->header['bankCode'] . '</BankCode>';
