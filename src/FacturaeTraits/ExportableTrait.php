@@ -330,11 +330,12 @@ trait ExportableTrait {
         $xml .= '<BIC>' . $this->header['paymentBIC'] . '</BIC>';
       }
 
-
+      /*
       if($this->header['bankCode'] !== '')
         $xml .= '<BankCode>' . $this->header['bankCode'] . '</BankCode>';
       if($this->header['branch'] !== '')
         $xml .= '<BranchCode>' . $this->header['branch'] . '</BranchCode>';
+
       if($this->header['countryCode'] !== '' && $this->header['countryCode'] === 'ESP'){
           $xml .= '<BranchInSpainAddress>';
           if($this->header['address'] !== '')
@@ -357,7 +358,7 @@ trait ExportableTrait {
             $xml .= '<Province>' . $this->header['province'] . '</Province>';
           $xml .= '<CountryCode>' . $this->header['countryCode'] . '</CountryCode>';
           $xml .= '</OverseasBranchAddress>';
-      }
+      }*/
       $xml .= "</$accountType>";
     }
     $xml .= '</Installment>';
