@@ -743,7 +743,7 @@ trait PropertiesTrait {
     $items = [];
     foreach ($this->items as $itemObj) {
       $item = $itemObj->getData($this);
-      $totals['grossAmount'] += $item['grossAmount'];
+      $totals['grossAmount'] += $item['totalAmountWithoutTax'];
       if(!empty($item['discounts']))
         $this->discounts[] = $item['discounts'][0];
       $items[] = $item;
