@@ -118,10 +118,12 @@ trait ExportableTrait {
     $xml .= '</InvoiceIssueData>';
 
     // Add invoice taxes
+
     foreach (["taxesOutputs", "taxesWithheld"] as $taxesGroup) {
       if (count($totals[$taxesGroup]) == 0) continue;
       $xmlTag = ucfirst($taxesGroup); // Just capitalize variable name
       $xml .= "<$xmlTag>";
+      /*
       foreach ($totals[$taxesGroup] as $type=>$taxRows) {
         foreach ($taxRows as $tax) {
           $xml .= '<Tax>' .
@@ -141,7 +143,22 @@ trait ExportableTrait {
           }
           $xml .= '</Tax>';
         }
-      }
+      }*/
+        foreach ($this->items as $itemObj) {
+            $item = $itemObj->getData($this);
+            foreach ($item[$taxesGroup] as $type => $tax) {
+                $xml .= '<Tax>' .
+                    '<TaxTypeCode>' . $type . '</TaxTypeCode>' .
+                    '<TaxRate>' . $this->pad($tax['rate'], 'Tax/TaxRate') . '</TaxRate>' .
+                    '<TaxableBase>' .
+                    '<TotalAmount>' . $this->pad($tax['base'], 'Tax/TaxableBase') . '</TotalAmount>' .
+                    '</TaxableBase>' .
+                    '<TaxAmount>' .
+                    '<TotalAmount>' . $this->pad($tax['amount'], 'Tax/TaxAmount') . '</TotalAmount>' .
+                    '</TaxAmount>';
+                $xml .= '</Tax>';
+            }
+        }
       $xml .= "</$xmlTag>";
     }
 

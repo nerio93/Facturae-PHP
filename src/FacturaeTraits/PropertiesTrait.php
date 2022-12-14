@@ -757,7 +757,7 @@ trait PropertiesTrait {
           $amount = $item['amount'];
         } else {
           $rate = $item['rate'];
-          $amount = isset($item['amount']) ? $item['amount'] : $totals['grossAmount'] * ($rate / 100);
+          $amount = $item['amount'] ?? $totals['grossAmount'] * ($rate / 100);
         }
         $totals['general' . ucfirst($groupTag)][] = [
           "reason" => $item['reason'],
