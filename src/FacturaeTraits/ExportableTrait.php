@@ -118,7 +118,7 @@ trait ExportableTrait {
     $xml .= '</InvoiceIssueData>';
 
     // Add invoice taxes
-
+      $total_taxes = 0;
     foreach (["taxesOutputs", "taxesWithheld"] as $taxesGroup) {
       if (count($totals[$taxesGroup]) == 0) continue;
       $xmlTag = ucfirst($taxesGroup); // Just capitalize variable name
@@ -144,9 +144,11 @@ trait ExportableTrait {
           $xml .= '</Tax>';
         }
       }*/
+
         foreach ($this->items as $itemObj) {
             $item = $itemObj->getData($this);
             foreach ($item[$taxesGroup] as $type => $tax) {
+                $total_taxes += $tax['amount'];
                 $xml .= '<Tax>' .
                     '<TaxTypeCode>' . $type . '</TaxTypeCode>' .
                     '<TaxRate>' . $this->pad($tax['rate'], 'Tax/TaxRate') . '</TaxRate>' .
@@ -190,7 +192,7 @@ trait ExportableTrait {
     $xml .= '<TotalGeneralDiscounts>' . $this->pad($totals['totalGeneralDiscounts'], 'TotalGeneralDiscounts') . '</TotalGeneralDiscounts>';
     $xml .= '<TotalGeneralSurcharges>' . $this->pad($totals['totalGeneralCharges'], 'TotalGeneralSurcharges') . '</TotalGeneralSurcharges>';
     $xml .= '<TotalGrossAmountBeforeTaxes>' . $this->pad($totals['grossAmountBeforeTaxes'], 'TotalGrossAmountBeforeTaxes') . '</TotalGrossAmountBeforeTaxes>';
-    $xml .= '<TotalTaxOutputs>' . $this->pad($totals['totalTaxesOutputs'], 'TotalTaxOutputs') . '</TotalTaxOutputs>';
+    $xml .= '<TotalTaxOutputs>' . $this->pad($total_taxes, 'TotalTaxOutputs') . '</TotalTaxOutputs>';
     $xml .= '<TotalTaxesWithheld>' . $this->pad($totals['totalTaxesWithheld'], 'TotalTaxesWithheld') . '</TotalTaxesWithheld>';
     $xml .= '<InvoiceTotal>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</InvoiceTotal>';
     $xml .= '<TotalOutstandingAmount>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</TotalOutstandingAmount>';
