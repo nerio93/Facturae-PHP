@@ -161,7 +161,7 @@ trait ExportableTrait {
         foreach ($this->items as $itemObj) {
             $item = $itemObj->getData($this);
             foreach ($item[$taxesGroup] as $type => $tax) {
-                $total_taxes += $tax['amount'];
+              //  $total_taxes += $tax['amount'];
                 $xml .= '<Tax>' .
                     '<TaxTypeCode>' . $type . '</TaxTypeCode>' .
                     '<TaxRate>' . $this->pad($tax['rate'], 'Tax/TaxRate') . '</TaxRate>' .
