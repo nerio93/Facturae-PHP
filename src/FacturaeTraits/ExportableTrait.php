@@ -57,7 +57,7 @@ trait ExportableTrait {
               }
           }
       }
-      $total_amount = $total_taxes + $total_before_taxes;
+      $total_amount = $total_taxes + $totals['grossAmountBeforeTaxes'] ;
       $totals['invoiceAmount'] = $total_amount;
       $paymentDetailsXML = $this->getPaymentDetailsXML($totals,$total_amount);
 
