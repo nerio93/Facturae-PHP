@@ -45,7 +45,7 @@ trait ExportableTrait {
     $xml = '<fe:Facturae xmlns:ds="http://www.w3.org/2000/09/xmldsig#" ' .
            'xmlns:fe="' . self::$SCHEMA_NS[$this->version] . '">';
     $totals = $this->getTotals();
-    $paymentDetailsXML = $this->getPaymentDetailsXML($totals);
+
     $total_taxes = 0;
     $total_before_taxes = 0;
       foreach (["taxesOutputs", "taxesWithheld"] as $taxesGroup) {
@@ -59,6 +59,7 @@ trait ExportableTrait {
       }
       $total_amount = $total_taxes + $total_before_taxes;
       $totals['invoiceAmount'] = $total_amount;
+      $paymentDetailsXML = $this->getPaymentDetailsXML($totals,$total_amount);
 
     // Add header
     $batchIdentifier = $this->parties['seller']->taxNumber . $this->header['number'] . $this->header['serie'];
@@ -70,13 +71,13 @@ trait ExportableTrait {
                 '<BatchIdentifier>' . $batchIdentifier . '</BatchIdentifier>' .
                 '<InvoicesCount>1</InvoicesCount>' .
                 '<TotalInvoicesAmount>' .
-                  '<TotalAmount>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</TotalAmount>' .
+                  '<TotalAmount>' . $this->pad($total_amount, 'InvoiceTotal') . '</TotalAmount>' .
                 '</TotalInvoicesAmount>' .
                 '<TotalOutstandingAmount>' .
-                  '<TotalAmount>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</TotalAmount>' .
+                  '<TotalAmount>' . $this->pad($total_amount, 'InvoiceTotal') . '</TotalAmount>' .
                 '</TotalOutstandingAmount>' .
                 '<TotalExecutableAmount>' .
-                  '<TotalAmount>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</TotalAmount>' .
+                  '<TotalAmount>' . $this->pad($total_amount, 'InvoiceTotal') . '</TotalAmount>' .
                 '</TotalExecutableAmount>' .
                 '<InvoiceCurrencyCode>' . $this->currency . '</InvoiceCurrencyCode>' .
               '</Batch>';
@@ -347,14 +348,14 @@ trait ExportableTrait {
    * @param  array  $totals Invoice totals
    * @return string         Payment details XML, empty string if not available
    */
-  private function getPaymentDetailsXML($totals) {
+  private function getPaymentDetailsXML($totals,$total_amount = -1) {
     if (is_null($this->header['paymentMethod'])) return "";
 
     $dueDate = is_null($this->header['dueDate']) ? $this->header['issueDate'] : $this->header['dueDate'];
     $xml  = '<PaymentDetails>';
     $xml .= '<Installment>';
     $xml .= '<InstallmentDueDate>' . date('Y-m-d', $dueDate) . '</InstallmentDueDate>';
-    $xml .= '<InstallmentAmount>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</InstallmentAmount>';
+    $xml .= '<InstallmentAmount>' . $this->pad($total_amount!=-1?$total_amount:$totals['invoiceAmount'], 'InvoiceTotal') . '</InstallmentAmount>';
     $xml .= '<PaymentMeans>' . $this->header['paymentMethod'] . '</PaymentMeans>';
     if (!is_null($this->header['paymentIBAN'])) {
       $accountType = ($this->header['paymentMethod'] == self::PAYMENT_DEBIT) ? "AccountToBeDebited" : "AccountToBeCredited";

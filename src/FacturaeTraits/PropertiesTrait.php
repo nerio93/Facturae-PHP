@@ -825,7 +825,7 @@ trait PropertiesTrait {
       $totals['grossAmount'] - $totals['totalGeneralDiscounts'] + $totals['totalGeneralCharges'],
       'TotalGrossAmountBeforeTaxes'
     );
-    $totals['invoiceAmount'] = $totals['grossAmountBeforeTaxes'] + $totals['totalTaxesOutputs'] - $totals['totalTaxesWithheld'];
+    $totals['invoiceAmount'] = $totals['grossAmountBeforeTaxes'] + $totals['totalTaxesOutputs'];
 
     return $totals;
   }
