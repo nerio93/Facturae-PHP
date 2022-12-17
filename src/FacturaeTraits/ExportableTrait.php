@@ -46,6 +46,19 @@ trait ExportableTrait {
            'xmlns:fe="' . self::$SCHEMA_NS[$this->version] . '">';
     $totals = $this->getTotals();
     $paymentDetailsXML = $this->getPaymentDetailsXML($totals);
+    $total_taxes = 0;
+    $total_before_taxes = 0;
+      foreach (["taxesOutputs", "taxesWithheld"] as $taxesGroup) {
+          foreach ($this->items as $itemObj) {
+              $item = $itemObj->getData($this);
+              $total_before_taxes += $item['totalAmountWithoutTax'];
+              foreach ($item[$taxesGroup] as $type => $tax) {
+                  $total_taxes += $tax['amount'];
+              }
+          }
+      }
+      $total_amount = $total_taxes + $total_before_taxes;
+      $totals['invoiceAmount'] = $total_amount;
 
     // Add header
     $batchIdentifier = $this->parties['seller']->taxNumber . $this->header['number'] . $this->header['serie'];
@@ -118,7 +131,7 @@ trait ExportableTrait {
     $xml .= '</InvoiceIssueData>';
 
     // Add invoice taxes
-      $total_taxes = 0;
+
     foreach (["taxesOutputs", "taxesWithheld"] as $taxesGroup) {
       if (count($totals[$taxesGroup]) == 0) continue;
       $xmlTag = ucfirst($taxesGroup); // Just capitalize variable name
@@ -189,14 +202,16 @@ trait ExportableTrait {
       $xml .= '</' . $generalGroups[$g][0] . '>';
     }
 
+    $invoice_total = $totals['grossAmountBeforeTaxes'] + $total_taxes;
+
     $xml .= '<TotalGeneralDiscounts>' . $this->pad($totals['totalGeneralDiscounts'], 'TotalGeneralDiscounts') . '</TotalGeneralDiscounts>';
     $xml .= '<TotalGeneralSurcharges>' . $this->pad($totals['totalGeneralCharges'], 'TotalGeneralSurcharges') . '</TotalGeneralSurcharges>';
     $xml .= '<TotalGrossAmountBeforeTaxes>' . $this->pad($totals['grossAmountBeforeTaxes'], 'TotalGrossAmountBeforeTaxes') . '</TotalGrossAmountBeforeTaxes>';
     $xml .= '<TotalTaxOutputs>' . $this->pad($total_taxes, 'TotalTaxOutputs') . '</TotalTaxOutputs>';
     $xml .= '<TotalTaxesWithheld>' . $this->pad($totals['totalTaxesWithheld'], 'TotalTaxesWithheld') . '</TotalTaxesWithheld>';
-    $xml .= '<InvoiceTotal>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</InvoiceTotal>';
-    $xml .= '<TotalOutstandingAmount>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</TotalOutstandingAmount>';
-    $xml .= '<TotalExecutableAmount>' . $this->pad($totals['invoiceAmount'], 'InvoiceTotal') . '</TotalExecutableAmount>';
+    $xml .= '<InvoiceTotal>' . $this->pad($invoice_total, 'InvoiceTotal') . '</InvoiceTotal>';
+    $xml .= '<TotalOutstandingAmount>' . $this->pad($invoice_total, 'InvoiceTotal') . '</TotalOutstandingAmount>';
+    $xml .= '<TotalExecutableAmount>' . $this->pad($invoice_total, 'InvoiceTotal') . '</TotalExecutableAmount>';
     $xml .= '</InvoiceTotals>';
 
     // Add invoice items
