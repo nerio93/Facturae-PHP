@@ -1,11 +1,14 @@
 <?php
 namespace josemmo\Facturae\Tests;
 
+use josemmo\Facturae\CorrectiveDetails;
 use josemmo\Facturae\Facturae;
 use josemmo\Facturae\FacturaeFile;
 use josemmo\Facturae\FacturaeItem;
 use josemmo\Facturae\FacturaeParty;
 use josemmo\Facturae\FacturaeCentre;
+
+
 
 final class InvoiceTest extends AbstractTest {
 
@@ -93,6 +96,18 @@ final class InvoiceTest extends AbstractTest {
       ]
     ]));
 
+    // Creamos una factura rectificativa (solo en algunos casos)
+    if (!$isPfx) {
+      $fac->setCorrective(new CorrectiveDetails([
+        "invoiceSeriesCode" => "EMP201712",
+        "invoiceNumber"     => "0002",
+        "reason"            => "03",
+        "taxPeriodStart"    => "2017-10-01",
+        "taxPeriodEnd"      => "2017-10-31",
+        "correctionMethod"  => CorrectiveDetails::METHOD_DIFFERENCES
+      ]));
+    }
+
     // Añadimos los productos a incluir en la factura
     // En este caso, probaremos con tres lámpara por
     // precio unitario de 20,14€, IVA al 21% YA INCLUÍDO
@@ -101,6 +116,15 @@ final class InvoiceTest extends AbstractTest {
     // Y ahora, una línea con IVA al 0%
     $fac->addItem("Algo exento de IVA", 100, 1, Facturae::TAX_IVA, 0);
 
+    // Otra línea con IVA 0% y código de fiscalidad especial
+    $fac->addItem(new FacturaeItem([
+      "name" => "Otro algo exento de IVA",
+      "unitPrice" => 50,
+      "taxes" => [Facturae::TAX_IVA => 0],
+      "specialTaxableEventCode" => FacturaeItem::SPECIAL_TAXABLE_EVENT_EXEMPT,
+      "specialTaxableEventReason" => "El motivo detallado de la exención de impuestos"
+    ]));
+    
     // Vamos a añadir un producto utilizando la API avanzada
     // que tenga IVA al 10%, IRPF al 15%, descuento del 10% y recargo del 5%
     $fac->addItem(new FacturaeItem([
