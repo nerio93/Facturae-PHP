@@ -125,6 +125,9 @@ trait ExportableTrait {
       }
       $xml .= '<ReasonCode>' . $corrective->reason . '</ReasonCode>';
       $xml .= '<ReasonDescription>' . $tools->escape($corrective->getReasonDescription()) . '</ReasonDescription>';
+      if($corrective->additionalReasonDescription!==null){
+        $xml .= '<AdditionalReasonDescription>' . $corrective->additionalReasonDescription . '</AdditionalReasonDescription>';
+      }
       if ($corrective->taxPeriodStart !== null && $corrective->taxPeriodEnd !== null) {
         $start = is_string($corrective->taxPeriodStart) ? strtotime($corrective->taxPeriodStart) : $corrective->taxPeriodStart;
         $end = is_string($corrective->taxPeriodEnd) ? strtotime($corrective->taxPeriodEnd) : $corrective->taxPeriodEnd;
@@ -134,6 +137,7 @@ trait ExportableTrait {
           '</TaxPeriod>';
       }
       $xml .= '<CorrectionMethod>' . $corrective->correctionMethod . '</CorrectionMethod>';
+      $xml .= '<InvoiceIssueDate>' . date('Y-m-d', $corrective->invoiceIssueDate) . '</InvoiceIssueDate>';
       $xml .= '<CorrectionMethodDescription>' .
       $tools->escape($corrective->getCorrectionMethodDescription()) .
         '</CorrectionMethodDescription>';

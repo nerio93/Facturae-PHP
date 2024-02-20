@@ -61,6 +61,22 @@ class CorrectiveDetails {
    */
   public $correctionMethodDescription = null;
 
+  
+  /**
+   * Invoice Issue Date (as UNIX timestamp or parsable date string)
+   * @var string|int|null
+   */
+  public $invoiceIssueDate = null;
+
+  /**
+   * Additional Reason Description
+   *
+   * NOTE: Using a custom value might yield a non-compliant invoice.
+   *
+   * @var string|null
+   */
+  public $additionalReasonDescription = null;
+
   /**
    * Class constructor
    * @param array $properties Corrective details properties as an array
