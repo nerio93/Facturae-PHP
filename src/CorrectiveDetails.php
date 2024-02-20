@@ -94,7 +94,53 @@ class CorrectiveDetails {
   public function getReasonDescription() {
     // Use custom value if available
     if ($this->reasonDescription !== null) {
-      return $this->reasonDescription;
+      switch ($this->reasonDescription) {
+        case "01":
+          return "Número de la factura";
+        case "02":
+          return "Serie de la factura";
+        case "03":
+          return "Fecha expedición";
+        case "04":
+          return "Nombre y apellidos/Razón Social-Emisor";
+        case "05":
+          return "Nombre y apellidos/Razón Social-Receptor";
+        case "06":
+          return "Identificación fiscal Emisor/obligado";
+        case "07":
+          return "Identificación fiscal Receptor";
+        case "08":
+          return "Domicilio Emisor/Obligado";
+        case "09":
+          return "Domicilio Receptor";
+        case "10":
+          return "Detalle Operación";
+        case "11":
+          return "Porcentaje impositivo a aplicar";
+        case "12":
+          return "Cuota tributaria a aplicar";
+        case "13":
+          return "Fecha/Periodo a aplicar";
+        case "14":
+          return "Clase de factura";
+        case "15":
+          return "Literales legales";
+        case "16":
+          return "Base imponible";
+        case "80":
+          return "Cálculo de cuotas repercutidas";
+        case "81":
+          return "Cálculo de cuotas retenidas";
+        case "82":
+          return "Base imponible modificada por devolución de envases / embalajes";
+        case "83":
+          return "Base imponible modificada por descuentos y bonificaciones";
+        case "84":
+          return "Base imponible modificada por resolución firme, judicial o administrativa";
+        case "85":
+          return "Base imponible modificada cuotas repercutidas no satisfechas. Auto de declaración de concurso";
+      }
+      return "";
     }
 
     // Fallback to default value per specification
@@ -154,7 +200,16 @@ class CorrectiveDetails {
   public function getCorrectionMethodDescription() {
     // Use custom value if available
     if ($this->correctionMethodDescription !== null) {
-      return $this->correctionMethodDescription;
+      switch ($this->correctionMethodDescription) {
+        case "01":
+          return "Rectificación íntegra";
+          case "02":
+          return "Rectificación por diferencias";
+          case "03":
+          return "Rectificación por descuento por volumen de operaciones durante un periodo";
+          case "04":
+          return "Autorizadas por la Agencia Tributaria";
+      }
     }
 
     // Fallback to default value per specification

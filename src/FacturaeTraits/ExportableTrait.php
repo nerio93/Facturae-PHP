@@ -124,10 +124,7 @@ trait ExportableTrait {
         $xml .= '<InvoiceSeriesCode>' . $tools->escape($corrective->invoiceSeriesCode) . '</InvoiceSeriesCode>';
       }
       $xml .= '<ReasonCode>' . $corrective->reason . '</ReasonCode>';
-      $xml .= '<ReasonDescription>' . $tools->escape($corrective->getReasonDescription()) . '</ReasonDescription>';
-      if($corrective->additionalReasonDescription!==null){
-        $xml .= '<AdditionalReasonDescription>' . $corrective->additionalReasonDescription . '</AdditionalReasonDescription>';
-      }
+      $xml .= '<ReasonDescription>' . $tools->escape($corrective->getReasonDescription()) . '</ReasonDescription>';      
       if ($corrective->taxPeriodStart !== null && $corrective->taxPeriodEnd !== null) {
         $start = is_string($corrective->taxPeriodStart) ? strtotime($corrective->taxPeriodStart) : $corrective->taxPeriodStart;
         $end = is_string($corrective->taxPeriodEnd) ? strtotime($corrective->taxPeriodEnd) : $corrective->taxPeriodEnd;
@@ -136,14 +133,17 @@ trait ExportableTrait {
             '<EndDate>' . date('Y-m-d', $end) . '</EndDate>' .
           '</TaxPeriod>';
       }
-      $xml .= '<CorrectionMethod>' . $corrective->correctionMethod . '</CorrectionMethod>';
-      if ($corrective->invoiceIssueDate !== null) {
-        $invoiceIssueDate = is_string($corrective->invoiceIssueDate) ? strtotime($corrective->invoiceIssueDate) : $corrective->invoiceIssueDate;
-        $xml .= '<InvoiceIssueDate>' . date('Y-m-d', $invoiceIssueDate) . '</InvoiceIssueDate>';
-      } 
+      $xml .= '<CorrectionMethod>' . $corrective->correctionMethod . '</CorrectionMethod>';      
       $xml .= '<CorrectionMethodDescription>' .
       $tools->escape($corrective->getCorrectionMethodDescription()) .
         '</CorrectionMethodDescription>';
+      if($corrective->additionalReasonDescription!==null){
+        $xml .= '<AdditionalReasonDescription>' . $corrective->additionalReasonDescription . '</AdditionalReasonDescription>';
+      }
+      if ($corrective->invoiceIssueDate !== null) {
+        $invoiceIssueDate = is_string($corrective->invoiceIssueDate) ? strtotime($corrective->invoiceIssueDate) : $corrective->invoiceIssueDate;
+        $xml .= '<InvoiceIssueDate>' . date('Y-m-d', $invoiceIssueDate) . '</InvoiceIssueDate>';
+      }
       $xml .= '</Corrective>';
     }
 

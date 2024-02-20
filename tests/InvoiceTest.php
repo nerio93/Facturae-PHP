@@ -102,7 +102,7 @@ final class InvoiceTest extends AbstractTest {
         "reasonDescription" => "03",
         "taxPeriodStart"    => "2017-10-01",
         "taxPeriodEnd"      => "2017-10-31",
-        "correctionMethodDescription" => "TEST METHOD DESCRIPTION",
+        "correctionMethodDescription" => "01",
         "additionalReasonDescription" => "TEST ADDITIONAL REASON DESCRIPTION",
         "invoiceIssueDate"      => "2017-11-01",
         "correctionMethod"  => CorrectiveDetails::METHOD_DIFFERENCES
