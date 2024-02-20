@@ -3,6 +3,7 @@ namespace nerio93\Facturae\FacturaeTraits;
 
 use nerio93\Facturae\FacturaeFile;
 use nerio93\Facturae\FacturaeItem;
+use nerio93\Facturae\CorrectiveDetails;
 
 /**
  * Implements all attributes and methods needed to make Facturae instantiable.
@@ -39,6 +40,8 @@ trait PropertiesTrait {
     "seller" => null,
     "buyer" => null
   );
+    /** @var CorrectiveDetails|null */
+    protected $corrective = null;
   protected $items = array();
   protected $legalLiterals = array();
   protected $discounts = array();
@@ -172,6 +175,26 @@ trait PropertiesTrait {
    */
   public function getBuyer() {
     return $this->parties['buyer'];
+  }
+  
+
+  /**
+   * Set corrective details
+   * @param  CorrectiveDetails|null $corrective Corrective details
+   * @return Facturae                           Invoice instance
+   */
+  public function setCorrective($corrective) {
+    $this->corrective = $corrective;
+    return $this;
+  }
+
+
+  /**
+   * Get corrective details
+   * @return CorrectiveDetails|null Corrective details
+   */
+  public function getCorrective() {
+    return $this->corrective;
   }
 
 

@@ -11,6 +11,11 @@ use nerio93\Facturae\Common\XmlTools;
  */
 class FacturaeParty {
 
+  const EU_COUNTRY_CODES = [
+    'AUT', 'BEL', 'BGR', 'CYP', 'CZE', 'DEU', 'DNK', 'ESP', 'EST', 'FIN', 'FRA', 'GRC', 'HRV', 'HUN',
+    'IRL', 'ITA', 'LTU', 'LUX', 'LVA', 'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVK', 'SVN', 'SWE'
+  ];
+
   public $isLegalEntity = true; // By default is a company and not a person
   public $taxNumber = null;
   public $name = null;
@@ -33,6 +38,8 @@ class FacturaeParty {
   public $town = null;
   public $province = null;
   public $countryCode = "ESP";
+  /** @var boolean|null */
+  public $isEuropeanUnionResident = null; // By default is calculated based on the country code
 
   public $email = null;
   public $phone = null;
@@ -66,7 +73,6 @@ class FacturaeParty {
    */
   public function getXML($schema) {
     $tools = new XmlTools();
-
     // Add tax identification
     $xml = '<TaxIdentification>' .
              '<PersonTypeCode>' . ($this->isLegalEntity ? 'J' : 'F') . '</PersonTypeCode>' .
@@ -179,6 +185,29 @@ class FacturaeParty {
 
     // Return data
     return $xml;
+  }
+
+
+  /**
+   * Get residence type code
+   *
+   * @return string Residence type code
+   */
+  public function getResidenceTypeCode() {
+    if ($this->countryCode === "ESP") {
+      return "R";
+    }
+
+    // Handle overrides
+    if ($this->isEuropeanUnionResident === true) {
+      return "U";
+    }
+    if ($this->isEuropeanUnionResident === false) {
+      return "E";
+    }
+
+    // Handle European countries
+    return in_array($this->countryCode, self::EU_COUNTRY_CODES, true) ? "U" : "E";
   }
 
 

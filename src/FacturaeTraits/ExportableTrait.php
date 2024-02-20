@@ -61,6 +61,8 @@ trait ExportableTrait {
       $totals['invoiceAmount'] = $total_amount;
       $paymentDetailsXML = $this->getPaymentDetailsXML($totals,$total_amount);
 
+    $corrective = $this->getCorrective();
+
     // Add header
     $batchIdentifier = $this->parties['seller']->taxNumber . $this->header['number'] . $this->header['serie'];
     $xml .= '<FileHeader>' .
@@ -110,8 +112,35 @@ trait ExportableTrait {
         '<InvoiceNumber>' . $this->header['number'] . '</InvoiceNumber>' .
         '<InvoiceSeriesCode>' . $this->header['serie'] . '</InvoiceSeriesCode>' .
         '<InvoiceDocumentType>' . $this->documentType . '</InvoiceDocumentType>' .
-        '<InvoiceClass>'. $this->invoiceClass .'</InvoiceClass>' .
-      '</InvoiceHeader>';
+        '<InvoiceClass>'. $this->invoiceClass .'</InvoiceClass>' ;
+     
+    // Add invoice data corrective
+    if ($corrective !== null) {
+      $xml .= '<Corrective>';
+      if ($corrective->invoiceNumber !== null) {
+        $xml .= '<InvoiceNumber>' . $tools->escape($corrective->invoiceNumber) . '</InvoiceNumber>';
+      }
+      if ($corrective->invoiceSeriesCode !== null) {
+        $xml .= '<InvoiceSeriesCode>' . $tools->escape($corrective->invoiceSeriesCode) . '</InvoiceSeriesCode>';
+      }
+      $xml .= '<ReasonCode>' . $corrective->reason . '</ReasonCode>';
+      $xml .= '<ReasonDescription>' . $tools->escape($corrective->getReasonDescription()) . '</ReasonDescription>';
+      if ($corrective->taxPeriodStart !== null && $corrective->taxPeriodEnd !== null) {
+        $start = is_string($corrective->taxPeriodStart) ? strtotime($corrective->taxPeriodStart) : $corrective->taxPeriodStart;
+        $end = is_string($corrective->taxPeriodEnd) ? strtotime($corrective->taxPeriodEnd) : $corrective->taxPeriodEnd;
+        $xml .= '<TaxPeriod>' .
+            '<StartDate>' . date('Y-m-d', $start) . '</StartDate>' .
+            '<EndDate>' . date('Y-m-d', $end) . '</EndDate>' .
+          '</TaxPeriod>';
+      }
+      $xml .= '<CorrectionMethod>' . $corrective->correctionMethod . '</CorrectionMethod>';
+      $xml .= '<CorrectionMethodDescription>' .
+      $tools->escape($corrective->getCorrectionMethodDescription()) .
+        '</CorrectionMethodDescription>';
+      $xml .= '</Corrective>';
+    }
+
+    $xml .= '</InvoiceHeader>';
     $xml .= '<InvoiceIssueData>';
     $xml .= '<IssueDate>' . date('Y-m-d', $this->header['issueDate']) . '</IssueDate>';
     if (!is_null($this->header['startDate'])) {
