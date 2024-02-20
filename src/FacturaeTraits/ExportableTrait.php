@@ -137,7 +137,10 @@ trait ExportableTrait {
           '</TaxPeriod>';
       }
       $xml .= '<CorrectionMethod>' . $corrective->correctionMethod . '</CorrectionMethod>';
-      $xml .= '<InvoiceIssueDate>' . date('Y-m-d', $corrective->invoiceIssueDate) . '</InvoiceIssueDate>';
+      if ($corrective->invoiceIssueDate !== null) {
+        $invoiceIssueDate = is_string($corrective->invoiceIssueDate) ? strtotime($corrective->invoiceIssueDate) : $corrective->invoiceIssueDate;
+        $xml .= '<InvoiceIssueDate>' . date('Y-m-d', $invoiceIssueDate) . '</InvoiceIssueDate>';
+      } 
       $xml .= '<CorrectionMethodDescription>' .
       $tools->escape($corrective->getCorrectionMethodDescription()) .
         '</CorrectionMethodDescription>';
