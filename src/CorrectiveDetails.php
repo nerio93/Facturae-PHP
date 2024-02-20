@@ -141,6 +141,7 @@ class CorrectiveDetails {
           return "Base imponible modificada cuotas repercutidas no satisfechas. Auto de declaración de concurso";
       }
       return "";
+      
     }
 
     // Fallback to default value per specification
